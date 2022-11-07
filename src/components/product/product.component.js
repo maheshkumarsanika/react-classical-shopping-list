@@ -1,14 +1,30 @@
 import React, { Component } from "react";
+import ViewProduct from "../view-product/view-product.component";
 
 export default class Product extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      viewProductData: null,
+    };
   }
+
+  handleViewProduct = (data) => {
+    this.setState({
+      viewProductData: data,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      viewProductData: null,
+    });
+  };
 
   render() {
     const { data } = this.props;
+    const { viewProductData } = this.state;
 
     return (
       <div className="column is-3">
@@ -24,12 +40,32 @@ export default class Product extends Component {
                 style={{ height: "300px" }}
               />
             </figure>
-            <button className="button is-info is-fullwidth">
+            <button
+              className="button is-info is-fullwidth"
+              onClick={(e) => this.handleViewProduct(data)}
+            >
               View Product
             </button>
             <button className="button is-info is-fullwidth mt-2">Buy</button>
           </article>
+          {viewProductData && <ViewProduct data={viewProductData} />}
         </div>
+
+        {viewProductData && (
+          <div class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <section class="modal-card-body">
+                <ViewProduct data={viewProductData} />
+              </section>
+            </div>
+            <button
+              onClick={(e) => this.closeModal()}
+              class="modal-close is-large"
+              aria-label="close"
+            ></button>
+          </div>
+        )}
       </div>
     );
   }
