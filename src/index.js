@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import ShoppingListPage from "./pages/shopping-list.page";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
