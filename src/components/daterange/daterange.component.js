@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { addDays } from "date-fns";
 import { DateRangePicker } from "react-date-range";
+import axios from "axios";
 
 export default class DateRange extends Component {
   constructor(props) {
@@ -22,14 +23,13 @@ export default class DateRange extends Component {
           startDate: addDays(new Date(), 8),
           endDate: addDays(new Date(), 10),
           key: "selection3",
-          autoFocus: false,
         },
       },
     };
   }
 
   handleAddRange = () => {
-    const key = `selection_${Object.values(this.state.ranges).length + 1}`;
+    const key = `selection${Object.values(this.state.ranges).length + 1}`;
 
     this.setState((prevState) => ({
       ...prevState,
@@ -44,21 +44,46 @@ export default class DateRange extends Component {
     }));
   };
 
+  sendRangesToApi = () => {
+    // send all ranges to api here
+    // ranges as an array
+    const { ranges } = this.state;
+    console.log(Object.values(ranges));
+    // axios
+    //   .post("url", { data: Object.values(ranges) })
+    //   .then((res) => console.log(res.data));
+  };
+
+  handleRangeSelection = (item) => {
+    this.setState();
+
+    this.setState(
+      (prevState) => ({
+        ...this.state,
+        ranges: {
+          ...prevState.ranges,
+          ...item,
+        },
+      }),
+      () => {
+        // latest ranges will be here
+        // call api
+        this.sendRangesToApi();
+      }
+    );
+  };
+
   render() {
     const { ranges } = this.state;
 
-    console.log(ranges);
     return (
       <>
         <div className=" m-4 " style={{ width: "200px" }}>
           <button onClick={this.handleAddRange}>Add</button>
         </div>
         <DateRangePicker
-          onChange={(item) =>
-            this.setState((prevState) => ({ ...this.state, ...item }))
-          }
+          onChange={this.handleRangeSelection}
           ranges={Object.values(ranges)}
-          //   rangeColors={this.state.ranges.map((r) => r.color)}
         />
       </>
     );
