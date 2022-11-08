@@ -31,17 +31,24 @@ export default class DateRange extends Component {
   handleAddRange = () => {
     const key = `selection${Object.values(this.state.ranges).length + 1}`;
 
-    this.setState((prevState) => ({
-      ...prevState,
-      ranges: {
-        ...prevState.ranges,
-        [key]: {
-          startDate: addDays(new Date(), 10),
-          endDate: addDays(new Date(), 14),
-          key,
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        ranges: {
+          ...prevState.ranges,
+          [key]: {
+            startDate: addDays(new Date(), 10),
+            endDate: addDays(new Date(), 14),
+            key,
+          },
         },
-      },
-    }));
+      }),
+      () => {
+        // latest ranges will be here
+        // call api
+        this.sendRangesToApi();
+      }
+    );
   };
 
   sendRangesToApi = () => {
