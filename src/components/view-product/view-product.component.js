@@ -3,10 +3,8 @@ import React, { Component } from "react";
 export default class ViewProduct extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
-
   render() {
     const { data } = this.props;
 

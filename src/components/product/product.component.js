@@ -52,16 +52,16 @@ export default class Product extends Component {
         </div>
 
         {viewProductData && (
-          <div class="modal is-active">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <section class="modal-card-body">
+          <div className="modal is-active">
+            <div className="modal-background"></div>
+            <div className="modal-card">
+              <section className="modal-card-body">
                 <ViewProduct data={viewProductData} />
               </section>
             </div>
             <button
               onClick={(e) => this.closeModal()}
-              class="modal-close is-large"
+              className="modal-close is-large"
               aria-label="close"
             ></button>
           </div>

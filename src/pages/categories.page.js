@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { Component } from "react";
-import DateRange from "../components/daterange/daterange.component";
 import Header from "../components/header/header.component";
 import Product from "../components/product/product.component";
-// import Search from "../components/search/searchbar.component.";
-export default class ShoppingListPage extends Component {
+
+export default class Categories extends Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +28,7 @@ export default class ShoppingListPage extends Component {
           <Header title="Shopping Cart" subTitle="Shop unlimited products" />
         </div>
         <h2 className="head m-6 has-text-info has-text-weight-bold is-size-3">
-          Products
+          Categories
         </h2>
         <div className="columns is-multiline px-6 py-3">
           {products.map((product) => (
